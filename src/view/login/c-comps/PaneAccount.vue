@@ -1,6 +1,6 @@
 <template>
     <div class="pane_account">
-        <el-form ref="ruleFormRef" :model="form" :rules="rules" label-width="60px" size="default" status-icon>
+        <el-form ref="formRef" :model="form" :rules="rules" label-width="60px" size="default" status-icon>
             <el-form-item label="账号" prop="username">
                 <el-input v-model="form.username" />
             </el-form-item>
@@ -14,8 +14,10 @@
 
 
 <script setup lang='ts'>
-import type { FormRules } from 'element-plus';
-import { reactive } from 'vue';
+import type { FormRules, ElForm } from 'element-plus';
+import { reactive, ref } from 'vue';
+import { login } from '@/service/api';
+
 
 const form = reactive({
     username: '',
@@ -31,6 +33,27 @@ const rules = reactive<FormRules>({
         { min: 6, message: '密码长度不能小于6', trigger: 'blur' },
     ],
 })
+
+const formRef = ref<InstanceType<typeof ElForm>>()
+const loginAction = () => {
+    formRef.value?.validate(async vali => {
+        if (vali) {
+            console.log('验证成功');
+            const params = {
+
+            }
+            const res = await login(form)
+        } else {
+            console.log('验证失败');
+
+        }
+    })
+}
+
+defineExpose({
+    loginAction
+})
+
 </script>
 
 

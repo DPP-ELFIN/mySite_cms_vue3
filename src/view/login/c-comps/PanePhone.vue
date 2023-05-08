@@ -39,9 +39,17 @@ const rules = reactive<FormRules>({
 })
 
 const getCode = () => {
-    console.log(1);
+    console.log('getCode');
 
 }
+
+const loginAction = () => {
+    console.log('loginAction phone');
+}
+
+defineExpose({
+    loginAction
+})
 
 </script>
 

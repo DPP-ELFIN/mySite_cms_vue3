@@ -13,7 +13,7 @@
                             </div>
                             账号密码
                         </template>
-                        <PaneAccount />
+                        <PaneAccount ref="paneAccount" />
                     </el-tab-pane>
                     <el-tab-pane name="phone">
                         <template #label>
@@ -25,7 +25,7 @@
 
                             手机登录
                         </template>
-                        <PanePhone />
+                        <PanePhone ref="panePhone" />
                     </el-tab-pane>
                 </el-tabs>
 
@@ -34,7 +34,7 @@
                 <el-checkbox v-model="isKeep" label="记住密码" size="large" />
                 <el-link type="primary">忘记密码</el-link>
             </div>
-            <el-button type="primary">登录</el-button>
+            <el-button type="primary" @click="loginFn">登录</el-button>
         </div>
     </div>
 </template>
@@ -47,8 +47,17 @@ import { ref } from 'vue';
 
 const isKeep = ref(false)
 const activeTabs = ref('account')
+const paneAccount = ref<InstanceType<typeof PaneAccount>>()
+const panePhone = ref<InstanceType<typeof PanePhone>>()
 const tabChange = (v) => {
-
+    activeTabs.value = v
+}
+const loginFn = () => {
+    if (activeTabs.value === 'account') {
+        paneAccount.value?.loginAction()
+    } else {
+        panePhone.value?.loginAction()
+    }
 }
 
 </script>
