@@ -3,9 +3,13 @@
 </script>
 
 <template>
-  <div>app</div>
   <router-link to="/main"></router-link>
   <router-view></router-view>
 </template>
 
-<style scoped></style>
+<style>
+#app {
+  height: 100vh;
+  width: 100vw;
+}
+</style>
