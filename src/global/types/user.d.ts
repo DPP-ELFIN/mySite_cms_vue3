@@ -6,4 +6,5 @@ declare interface User {
   image?: string;
   createAt?: Date;
   updateAt?: Date;
+  [key: string]: any;
 }

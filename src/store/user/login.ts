@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { login } from '@/service/api';
 import { localCache } from '@/utils/cache';
+import router from '@/router';
 
 const LoginStore = defineStore('LoginStore', {
   state: () => ({
@@ -15,6 +16,9 @@ const LoginStore = defineStore('LoginStore', {
       //   console.log(this.user);
       localCache.setCache('user', this.user);
       localCache.setCache('token', this.token);
+
+      // 登录成功，路由跳转
+      router.push('/main');
     }
   }
 });

@@ -1,22 +1,19 @@
 <template>
     <div class="main">
-        {{ useCounter.counter }} --- {{ useCounter.doubleCounter }}
-        <button @click="change">修改</button>
-        <el-button>Default</el-button>
-        <el-button type="primary">Primary</el-button>
-        <el-button type="success">Success</el-button>
-        <el-button type="info">Info</el-button>
-        <el-button type="warning">Warning</el-button>
-        <el-button type="danger">Danger</el-button>
+        <button @click="handleExit">退出登录</button>
+
     </div>
 </template>
 
 
 <script setup lang='ts'>
 import useCounterStore from '@/store/counter';
-const useCounter = useCounterStore()
-const change = () => {
-    useCounter.changeCounter(999)
+import { localCache } from '@/utils/cache';
+import { useRouter } from 'vue-router';
+const router = useRouter()
+const handleExit = () => {
+    localCache.removeCache('token')
+    router.push('/login')
 }
 
 </script>

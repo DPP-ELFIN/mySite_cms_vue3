@@ -57,7 +57,6 @@ const tabChange = (v) => {
 const loginFn = () => {
     if (activeTabs.value === 'account') {
         paneAccount.value?.loginAction(isKeep.value)
-
     } else {
         panePhone.value?.loginAction()
     }
