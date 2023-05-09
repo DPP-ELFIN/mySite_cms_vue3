@@ -44,17 +44,20 @@
 import PaneAccount from './c-comps/PaneAccount.vue'
 import PanePhone from './c-comps/PanePhone.vue'
 import { ref } from 'vue';
+import { localCache } from '@/utils/cache';
 
-const isKeep = ref(false)
+const isKeep = ref(localCache.getCache('account')?.isKeep || false)
 const activeTabs = ref('account')
 const paneAccount = ref<InstanceType<typeof PaneAccount>>()
 const panePhone = ref<InstanceType<typeof PanePhone>>()
 const tabChange = (v) => {
     activeTabs.value = v
 }
+
 const loginFn = () => {
     if (activeTabs.value === 'account') {
-        paneAccount.value?.loginAction()
+        paneAccount.value?.loginAction(isKeep.value)
+
     } else {
         panePhone.value?.loginAction()
     }
