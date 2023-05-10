@@ -3,7 +3,6 @@
 </script>
 
 <template>
-  <router-link to="/main"></router-link>
   <router-view></router-view>
 </template>
 

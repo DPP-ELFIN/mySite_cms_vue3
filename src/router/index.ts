@@ -1,5 +1,6 @@
 import { localCache } from '@/utils/cache';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import mainChildren from './mainChildren';
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -14,7 +15,8 @@ const router = createRouter({
     },
     {
       path: '/main',
-      component: import('../view/main/main.vue')
+      component: import('../view/main/main.vue'),
+      children: mainChildren
     },
     {
       path: '/:pathMatch(.*)',
