@@ -3,7 +3,6 @@ import type { RouteRecordRaw } from 'vue-router';
 const mainChildren: RouteRecordRaw[] = [
   {
     path: '/main/overView',
-    // component:import('../view/main/main.vue'),
     redirect: '/main/tecStack',
     meta: {
       id: 1,
@@ -14,8 +13,8 @@ const mainChildren: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: '/main/tecStack',
-        component: import('../view/main/main.vue'),
+        path: '/main/overView/tecStack',
+        component: import('../view/main/overView/tecStack/tecStack.vue'),
         meta: {
           id: 11,
           icon: 'Monitor',

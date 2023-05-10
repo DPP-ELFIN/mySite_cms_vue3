@@ -2,11 +2,11 @@
     <div class="main_aside">
         <div class="logo">
             <img src="@/assets/logo.svg" alt="">
-            <h3 class="title">DPP的后台</h3>
+            <h3 class="title" v-show="isExpand">DPP的后台</h3>
         </div>
         <div class="menu">
             <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo"
-                default-active="11" text-color="#fff" @open="handleOpen" @close="handleClose">
+                :collapse="!isExpand" default-active="11" text-color="#fff" @open="handleOpen" @close="handleClose">
                 <el-sub-menu v-for="subMenu in mainChildren" :key="subMenu.meta?.id" :index="subMenu.meta?.id + ''">
                     <template #title>
                         <el-icon>
@@ -15,8 +15,8 @@
                         </el-icon>
                         <span>{{ subMenu.meta?.name }}</span>
                     </template>
-                    <el-menu-item v-for="subItem in subMenu.children" :key="subItem.meta?.id"
-                        :index="subItem.meta?.id + ''">{{
+                    <el-menu-item v-for="subItem in subMenu.children" :key="subItem.meta?.id" :index="subItem.meta?.id + ''"
+                        @click="goAbout(subItem)">{{
                             subItem.meta?.name }}</el-menu-item>
                 </el-sub-menu>
 
@@ -28,6 +28,21 @@
 
 <script setup lang='ts'>
 import mainChildren from '@/router/mainChildren'
+import { useRouter } from 'vue-router'
+
+defineProps({
+    isExpand: {
+        type: Boolean,
+        default: true
+    }
+})
+
+const router = useRouter()
+const goAbout = (item) => {
+    console.log(item.path);
+    router.push(item.path)
+}
+
 const handleOpen = () => { }
 const handleClose = () => { }
 </script>
