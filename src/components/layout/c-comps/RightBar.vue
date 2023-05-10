@@ -8,7 +8,7 @@
 
         <div class="user">
             <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
-            <el-dropdown>
+            <el-dropdown @command="clickAbout">
                 <span class="el-dropdown-link">
                     Dropdown List
                     <el-icon class="el-icon--right">
@@ -17,9 +17,9 @@
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item icon="Close">退出登录</el-dropdown-item>
-                        <el-dropdown-item icon="InfoFilled" divided>个人信息</el-dropdown-item>
-                        <el-dropdown-item icon="Unlock">修改密码</el-dropdown-item>
+                        <el-dropdown-item icon="Close" command="exit">退出登录</el-dropdown-item>
+                        <el-dropdown-item icon="InfoFilled" divided command="info">个人信息</el-dropdown-item>
+                        <el-dropdown-item icon="Unlock" command="psw">修改密码</el-dropdown-item>
 
                     </el-dropdown-menu>
                 </template>
@@ -31,7 +31,58 @@
 
 
 <script setup lang='ts'>
+import { localCache } from '@/utils/cache';
+import { useRouter } from 'vue-router';
+import { ElMessage, ElMessageBox } from 'element-plus'
 
+
+const router = useRouter()
+
+const clickAbout = (command) => {
+    switch (command) {
+        case 'exit':
+            handleLogout()
+            break;
+
+        case 'info':
+
+            break;
+
+        case 'psw':
+
+            break;
+
+        default:
+            break;
+    }
+}
+
+const handleLogout = () => {
+    ElMessageBox.confirm(
+        '是否退出登录！',
+        '提示',
+        {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+        }
+    )
+        .then(() => {
+            localCache.removeCache('token')
+            localCache.removeCache('user')
+            router.push('/login')
+            ElMessage({
+                type: 'success',
+                message: '退出登录成功',
+            })
+        })
+        .catch(() => {
+            ElMessage({
+                type: 'info',
+                message: '取消操作',
+            })
+        })
+}
 
 </script>
 
