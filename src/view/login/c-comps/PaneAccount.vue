@@ -16,12 +16,13 @@
 <script setup lang='ts'>
 import type { FormRules, ElForm } from 'element-plus';
 import { reactive, ref } from 'vue';
-import { login } from '@/service/api';
+import LoginStore from '@/store/user/login'
+import { localCache } from '@/utils/cache';
 
 
-const form = reactive({
-    username: '',
-    password: ''
+const form = reactive<User>({
+    username: localCache.getCache('account')?.username ?? '',
+    password: localCache.getCache('account')?.password ?? '',
 })
 const rules = reactive<FormRules>({
     username: [
@@ -35,14 +36,19 @@ const rules = reactive<FormRules>({
 })
 
 const formRef = ref<InstanceType<typeof ElForm>>()
-const loginAction = () => {
+
+const loginStore = LoginStore()
+
+const loginAction = (isKeep: boolean) => {
     formRef.value?.validate(async vali => {
         if (vali) {
             console.log('验证成功');
-            const params = {
-
+            loginStore.loginAccountAction(form)
+            if (isKeep) {
+                localCache.setCache('account', { ...form, isKeep: isKeep })
+            } else {
+                localCache.removeCache('account')
             }
-            const res = await login(form)
         } else {
             console.log('验证失败');
 

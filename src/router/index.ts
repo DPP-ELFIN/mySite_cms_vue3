@@ -1,4 +1,6 @@
+import { localCache } from '@/utils/cache';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import mainChildren from './mainChildren';
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -13,7 +15,8 @@ const router = createRouter({
     },
     {
       path: '/main',
-      component: import('../view/main/main.vue')
+      component: import('../view/main/main.vue'),
+      children: mainChildren
     },
     {
       path: '/:pathMatch(.*)',
@@ -21,4 +24,18 @@ const router = createRouter({
     }
   ]
 });
+
+router.beforeEach((to, form) => {
+  const token = localCache.getCache('token');
+  if (
+    // 检查用户是否已登录
+    !token &&
+    // ❗️ 避免无限重定向
+    to.path !== '/login'
+  ) {
+    // 将用户重定向到登录页面
+    return { path: '/login' };
+  }
+});
+
 export default router;

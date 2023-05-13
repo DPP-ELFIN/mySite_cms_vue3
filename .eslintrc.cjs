@@ -15,6 +15,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-unused-vars': 'off',
     'vue/multi-word-component-names': 'off',
-    'prefer-const': 'off'
+    'prefer-const': 'off',
+    'no-undef': 'off'
   }
 };
