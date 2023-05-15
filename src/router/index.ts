@@ -15,6 +15,7 @@ const router = createRouter({
     },
     {
       path: '/main',
+      redirect: '/main/overView/tecStack',
       component: import('../view/main/main.vue'),
       children: mainChildren
     },

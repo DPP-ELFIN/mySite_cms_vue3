@@ -3,12 +3,12 @@ import type { RouteRecordRaw } from 'vue-router';
 const mainChildren: RouteRecordRaw[] = [
   {
     path: '/main/overView',
-    redirect: '/main/tecStack',
+    redirect: '/main/overView/tecStack',
     meta: {
       id: 1,
       icon: 'Monitor',
       name: '总览',
-      path: '/overView',
+      url: '/overView',
       parentId: 0
     },
     children: [
@@ -19,7 +19,7 @@ const mainChildren: RouteRecordRaw[] = [
           id: 11,
           icon: 'Monitor',
           name: '技术栈',
-          path: '/tecStack',
+          url: '/tecStack',
           parentId: 1
         },
         children: []
@@ -34,7 +34,7 @@ const mainChildren: RouteRecordRaw[] = [
       id: 2,
       icon: 'Monitor',
       name: '总览',
-      path: '/overView',
+      url: '/overView',
       parentId: 0
     },
     children: [
@@ -45,7 +45,7 @@ const mainChildren: RouteRecordRaw[] = [
           id: 21,
           icon: 'Monitor',
           name: '技术栈',
-          path: '/tecStack',
+          url: '/tecStack',
           parentId: 2
         },
         children: []

@@ -10,7 +10,8 @@
             <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
             <el-dropdown @command="clickAbout">
                 <span class="el-dropdown-link">
-                    Dropdown List
+                    <!-- {{ store.user.username }} -->
+                    aaa
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
@@ -34,6 +35,9 @@
 import { localCache } from '@/utils/cache';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus'
+import LoginStore from '@/store/user/login';
+
+const store = LoginStore()
 
 
 const router = useRouter()
