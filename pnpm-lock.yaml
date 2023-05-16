@@ -9,6 +9,7 @@ specifiers:
   '@vue/eslint-config-typescript': ^11.0.2
   '@vue/tsconfig': ^0.1.3
   axios: ^1.3.6
+  dayjs: ^1.11.7
   element-plus: ^2.3.4
   eslint: ^8.34.0
   eslint-plugin-vue: ^9.9.0
@@ -28,6 +29,7 @@ specifiers:
 dependencies:
   '@element-plus/icons-vue': registry.npmmirror.com/@element-plus/icons-vue/2.1.0_vue@3.2.47
   axios: registry.npmmirror.com/axios/1.3.6
+  dayjs: registry.npmmirror.com/dayjs/1.11.7
   element-plus: registry.npmmirror.com/element-plus/2.3.4_vue@3.2.47
   less: registry.npmmirror.com/less/4.1.3
   normalize.css: registry.npmmirror.com/normalize.css/8.0.1

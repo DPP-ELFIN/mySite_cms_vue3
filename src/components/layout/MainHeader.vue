@@ -20,7 +20,7 @@
 import { ArrowRight } from '@element-plus/icons-vue'
 
 import RightBar from './c-comps/RightBar.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import mainChildren from '@/router/mainChildren'
 
@@ -49,7 +49,9 @@ const handleBreadCrumbs = (path: string, menus: any[]) => {
     return breadCrumbs
 }
 
-const breadCrumb = handleBreadCrumbs(route.path, mainChildren as any)
+const breadCrumb = computed(() => {
+    return handleBreadCrumbs(route.path, mainChildren as any)
+})
 console.log(breadCrumb);
 
 </script>

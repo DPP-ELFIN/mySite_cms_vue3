@@ -13,8 +13,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "noImplicitAny": false,
-    "ignoreDeprecations": "5.0",
+    "noImplicitAny": false
+    // "ignoreDeprecations": "5.0",
   },
 
   "references": [

@@ -10,5 +10,6 @@
 #app {
   height: 100vh;
   width: 100vw;
+  /* font-family: Furore-2; */
 }
 </style>

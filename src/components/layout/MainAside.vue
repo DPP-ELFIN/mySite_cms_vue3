@@ -6,7 +6,7 @@
         </div>
         <div class="menu">
             <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo"
-                :collapse="!isExpand" default-active="11" text-color="#fff" @open="handleOpen" @close="handleClose">
+                :collapse="!isExpand" default-active="11" text-color="#fff">
                 <el-sub-menu v-for="subMenu in mainChildren" :key="subMenu.meta?.id" :index="subMenu.meta?.id + ''">
                     <template #title>
                         <el-icon>
@@ -28,7 +28,8 @@
 
 <script setup lang='ts'>
 import mainChildren from '@/router/mainChildren'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+
 
 defineProps({
     isExpand: {
@@ -36,15 +37,17 @@ defineProps({
         default: true
     }
 })
-
+const route = useRoute()
 const router = useRouter()
 const goAbout = (item) => {
     console.log(item.path);
     router.push(item.path)
 }
 
-const handleOpen = () => { }
-const handleClose = () => { }
+const getDefaultActive = () => {
+    // const activeId = mainChildren.find()
+}
+
 </script>
 
 
