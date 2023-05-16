@@ -34,8 +34,8 @@ const handleExpand = () => {
 }
 
 const handleBreadCrumbs = (path: string, menus: any[]) => {
-    console.log(path);
-    console.log(menus);
+    // console.log(path);
+    // console.log(menus);
 
     const breadCrumbs: any[] = []
     for (const menu of menus) {
@@ -52,7 +52,7 @@ const handleBreadCrumbs = (path: string, menus: any[]) => {
 const breadCrumb = computed(() => {
     return handleBreadCrumbs(route.path, mainChildren as any)
 })
-console.log(breadCrumb);
+// console.log(breadCrumb);
 
 </script>
 

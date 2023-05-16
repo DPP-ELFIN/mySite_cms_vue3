@@ -34,17 +34,26 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
-import { ElMessageBox, } from 'element-plus'
+import { ref, reactive, watch } from 'vue'
+import { ElMessage, ElMessageBox, } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
+import { addDemandApi, editStatus } from '@/service/api'
 
-defineProps({
+const props = defineProps({
     about: {
         type: String,
         default: 'nuxt_front'
-    }
+    },
+    tableRow: {
+        type: Object,
+        default: () => { }
+    },
+
 })
+const titleMap = new Map([['nuxt_front', '前端页面']])
+const aboutMap = new Map([['nuxt_front', 0]])
 const drawer = ref(false)
+const isModify = ref(false) //是否修改
 const formRefs = ref<FormInstance>()
 
 const form = reactive({
@@ -53,6 +62,7 @@ const form = reactive({
     person: [],
     time: ''
 })
+const emit = defineEmits(['addSuccess'])
 const rules = reactive<FormRules>({
     name: [
         { required: true, message: '需求名称不能为空', trigger: 'blur' },
@@ -86,29 +96,47 @@ const options = [
         label: 'Option5',
     },
 ]
-const titleMap = new Map([['nuxt_front', '前端页面']])
-
-const addDemand = () => {
-    console.log('添加需求');
-    drawer.value = true
-}
-
-
-const handleClose = () => {
-    drawer.value = false
-}
 function confirmClick() {
     formRefs.value?.validate(vali => {
         if (vali) {
-            console.log('验证通过');
-            drawer.value = false
+            addDemandFn()
         } else {
             console.log('验证未通过');
-
         }
     })
 }
+const addDemandFn = async () => {
+    let res: Res
+    if (isModify.value) {
+        res = await addDemandApi({ ...form, about: aboutMap.get(props.about) })
+    } else {
+        res = await editStatus({ id: props.tableRow._id, ...form })
+    }
+    if (res.code !== 201) return ElMessage.error(res.errors.msg)
+    ElMessage.success(res.msg)
+    emit('addSuccess')
+    handleClose()
+}
 
+const resetForm = () => {
+    form.name = ''
+    form.remark = ''
+    form.person = []
+    form.time = ''
+}
+
+const addDemand = () => {
+    drawer.value = true
+    isModify.value = false
+}
+const handleClose = () => {
+    drawer.value = false
+}
+watch(drawer, (v) => {
+    if (!v) resetForm()
+})
+
+defineExpose({ form, addDemand, isModify })
 </script>
 
 
