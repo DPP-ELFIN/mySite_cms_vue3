@@ -107,7 +107,9 @@ function confirmClick() {
 }
 const addDemandFn = async () => {
     let res: Res
-    if (isModify.value) {
+    console.log(isModify.value);
+
+    if (!isModify.value) {
         res = await addDemandApi({ ...form, about: aboutMap.get(props.about) })
     } else {
         res = await editStatus({ id: props.tableRow._id, ...form })
@@ -123,18 +125,19 @@ const resetForm = () => {
     form.remark = ''
     form.person = []
     form.time = ''
+    isModify.value = false
 }
 
 const addDemand = () => {
     drawer.value = true
-    isModify.value = false
 }
 const handleClose = () => {
     drawer.value = false
+    resetForm()
 }
-watch(drawer, (v) => {
-    if (!v) resetForm()
-})
+// watch(drawer, (v) => {
+//     if (!v) resetForm()
+// })
 
 defineExpose({ form, addDemand, isModify })
 </script>
