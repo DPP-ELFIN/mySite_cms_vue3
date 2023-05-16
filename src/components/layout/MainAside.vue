@@ -6,7 +6,7 @@
         </div>
         <div class="menu">
             <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo"
-                :collapse="!isExpand" default-active="11" text-color="#fff">
+                :collapse="!isExpand" :default-active="defaultActive" text-color="#fff">
                 <el-sub-menu v-for="subMenu in mainChildren" :key="subMenu.meta?.id" :index="subMenu.meta?.id + ''">
                     <template #title>
                         <el-icon>
@@ -28,6 +28,7 @@
 
 <script setup lang='ts'>
 import mainChildren from '@/router/mainChildren'
+import { onBeforeMount, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router'
 
 
@@ -37,17 +38,26 @@ defineProps({
         default: true
     }
 })
+const defaultActive = ref<string>()
 const route = useRoute()
 const router = useRouter()
 const goAbout = (item) => {
-    console.log(item.path);
     router.push(item.path)
 }
 
 const getDefaultActive = () => {
-    // const activeId = mainChildren.find()
+    for (const item of mainChildren) {
+        for (const child of item.children ?? []) {
+            if(route.path===child.path){
+                console.log(child.meta?.id);
+                defaultActive.value = child.meta?.id+''
+            }
+        }
+    }
 }
-
+onBeforeMount(()=>{
+    getDefaultActive()
+})
 </script>
 
 
