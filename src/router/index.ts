@@ -1,6 +1,9 @@
 import { localCache } from '@/utils/cache';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import mainChildren from './mainChildren';
+import Login from '../view/login/login.vue'
+import Main from '../view/main/main.vue'
+import NotFound from '../view/404/NotFound.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -11,17 +14,17 @@ const router = createRouter({
     },
     {
       path: '/login',
-      component: import('../view/login/login.vue')
+      component: Login
     },
     {
       path: '/main',
       redirect: '/main/overView/tecStack',
-      component: import('../view/main/main.vue'),
+      component: Main,
       children: mainChildren
     },
     {
       path: '/:pathMatch(.*)',
-      component: import('../view/404/NotFound.vue')
+      component: NotFound
     }
   ]
 });

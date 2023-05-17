@@ -1,4 +1,9 @@
 import type { RouteRecordRaw } from 'vue-router';
+import TecStack from '../view/main/overView/tecStack/tecStack.vue'
+import NuxtFront from '../view/project/nuxt-front/nuxt-front.vue'
+import Vue3Cms from '../view/project/vue3-cms/vue3-cms.vue'
+import ServerNode from '../view/project/server-node/server-node.vue'
+
 
 const mainChildren: RouteRecordRaw[] = [
   {
@@ -14,7 +19,7 @@ const mainChildren: RouteRecordRaw[] = [
     children: [
       {
         path: '/main/overView/tecStack',
-        component: import('../view/main/overView/tecStack/tecStack.vue'),
+        component: TecStack,
         meta: {
           id: 11,
           icon: 'Monitor',
@@ -40,7 +45,7 @@ const mainChildren: RouteRecordRaw[] = [
     children: [
       {
         path: '/main/tecStack',
-        component: import('../view/main/main.vue'),
+        component: TecStack,
         meta: {
           id: 21,
           icon: 'Monitor',
@@ -55,7 +60,7 @@ const mainChildren: RouteRecordRaw[] = [
   {
     path: '/main/project',
     // component:import('../view/main/main.vue'),
-    redirect: '/main/tecStack',
+    redirect: '/main/project/nuxt_front',
     meta: {
       id: 3,
       icon: 'Monitor',
@@ -66,7 +71,7 @@ const mainChildren: RouteRecordRaw[] = [
     children: [
       {
         path: '/main/project/nuxt_front',
-        component: import('../view/project/nuxt-front/nuxt-front.vue'),
+        component: NuxtFront,
         meta: {
           id: 31,
           icon: 'Monitor',
@@ -78,7 +83,7 @@ const mainChildren: RouteRecordRaw[] = [
       },
       {
         path: '/main/project/vue3_cms',
-        component: import('../view/project/vue3-cms/vue3-cms.vue'),
+        component: Vue3Cms,
         meta: {
           id: 32,
           icon: 'Monitor',
@@ -90,7 +95,7 @@ const mainChildren: RouteRecordRaw[] = [
       },
       {
         path: '/main/project/server_node',
-        component: import('../view/project/server-node/server-node.vue'),
+        component: ServerNode,
         meta: {
           id: 33,
           icon: 'Monitor',
